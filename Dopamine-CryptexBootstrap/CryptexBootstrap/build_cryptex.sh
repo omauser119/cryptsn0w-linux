@@ -889,6 +889,7 @@ chmod 0644 "$EMBEDDED_SBINJECT_JITTERD_PLIST"
 # The launcher has only sixteen bytes of header padding, so the pinned patcher
 # safely converts its otherwise-unused 40-byte LC_RPATH into
 # `LC_LOAD_DYLIB @loader_path/g` before deterministic ad-hoc signing.
+if [[ -f "$SPRINGBOARD_CANDIDATE_SOURCE" ]]; then
 ditto --noqtn "$SPRINGBOARD_CANDIDATE_BUNDLE_SOURCE" \
     "$SPRINGBOARD_CANDIDATE_DIRECTORY"
 rm -f "$SPRINGBOARD_CANDIDATE_DIRECTORY/SpringBoard"
@@ -904,11 +905,15 @@ python3 "$SPRINGBOARD_CANDIDATE_BUILDER" \
     --bundle-executable notSpringBoard \
     --load-dylib @loader_path/g \
     --load-dylib-patcher "$SCRIPT_DIR/patch_load_dylib.py" >/dev/null
+else
+    print -- "Skipping SpringBoard candidate (no device asset)"
+fi
 
 # Build the Settings replacement through the same supplied SBInject pre-main
 # lane.  Preserve its exact on-device bundle and entitlement dictionary, add
 # only the target's debugger/JIT policy, preload the compact general hook, and
 # retain a separate launchd crash-loop fallback from SpringBoard.
+if [[ -f "$PREFERENCES_CANDIDATE_SOURCE" ]]; then
 ditto --noqtn "$PREFERENCES_CANDIDATE_BUNDLE_SOURCE" \
     "$PREFERENCES_CANDIDATE_DIRECTORY"
 rm -f "$PREFERENCES_CANDIDATE_DIRECTORY/Preferences"
@@ -924,13 +929,17 @@ python3 "$SPRINGBOARD_CANDIDATE_BUILDER" \
     --bundle-executable notPreferences \
     --load-dylib @loader_path/g \
     --load-dylib-patcher "$SCRIPT_DIR/patch_load_dylib.py" >/dev/null
+else
+    print -- "Skipping Preferences candidate (no device asset)"
+fi
 
 # Build a standalone, device-matched amfid copy rather than injecting an
 # ad-hoc dylib into Apple's live system binary. The fixed hook and resigned
 # candidate are immutable Cryptex trust-cache entries; get-task-allow lets the
 # existing jitterd attach/detach lane grant the candidate its debug state.
-[[ -f "$AMFID_CANDIDATE_SOURCE" ]] || \
-    die "missing device-matched amfid source"
+if [[ ! -f "$AMFID_CANDIDATE_SOURCE" ]]; then
+    print -- "Skipping amfid candidate (no device asset)"
+else
 cp "$SBINJECT_AMFIHOOK" "$AMFID_CANDIDATE_HOOK"
 chmod 0755 "$AMFID_CANDIDATE_HOOK"
 python3 "$AMFID_CANDIDATE_BUILDER" \
@@ -946,6 +955,7 @@ ldid -e "$AMFID_CANDIDATE" | rg -q '<key>get-task-allow</key>' || \
 [[ "$(sha256_of "$AMFID_CANDIDATE_HOOK")" == \
    "$(sha256_of "$SBINJECT_AMFIHOOK")" ]] || \
     die "amfid hook changed while copying"
+fi
 
 zstd -dc "$BOOTSTRAP_ARCHIVE" | \
     tar -xf - -C "$WORK_DIR"
@@ -1411,7 +1421,6 @@ for candidate in \
     "$TROLLSTORE_BROKER_CLIENT" \
     "$TROLLSTORE_SETTINGS_HOOK" \
     "$SBINJECT_PACKAGE_VALIDATOR" \
-    "$SBINJECT_GENERALHOOK" \
     "$SBINJECT_AMFIHOOK" \
     "$SBINJECT_LSD_REGISTRATION_HOOK" \
     "$SBINJECT_TROLLSTORE_REGISTRATION_HOOK" \
@@ -1420,12 +1429,6 @@ for candidate in \
     "$SBINJECT_LAUNCHDHOOK" \
     "$SBINJECT_SHADOW_BOOTSTRAP" \
     "$SBINJECT_JITTERD" \
-    "$SPRINGBOARD_CANDIDATE_GENERALHOOK" \
-    "$SPRINGBOARD_CANDIDATE" \
-    "$PREFERENCES_CANDIDATE_GENERALHOOK" \
-    "$PREFERENCES_CANDIDATE" \
-    "$AMFID_CANDIDATE_HOOK" \
-    "$AMFID_CANDIDATE" \
     "${prepared_sileo_machos[@]}" \
     "${trusted_ellekit_machos[@]}" \
     "${trusted_shadow_machos[@]}" \
