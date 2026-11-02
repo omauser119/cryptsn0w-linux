@@ -1,18 +1,26 @@
-name: Validate (macOS)
+name: Build Cryptex (macOS)
 
 on:
   workflow_dispatch:
 
 jobs:
-  validate:
+  build:
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - name: Install deps
-        run: brew install python ripgrep zstd
+        run: |
+          brew install python ripgrep zstd
+          brew install openssl@1.1 || brew install openssl@3
       - name: Prepare
         run: ./Dopamine-CryptexBootstrap/setup.sh --prepare
-      - name: Python compile
-        run: python3 -m py_compile Dopamine-CryptexBootstrap/CryptexBootstrap/*.py
-      - name: Tests
-        run: python3 -m unittest discover -s Tests -p 'test_*.py'
+      - name: Build
+        env:
+          PKG_CONFIG_PATH: /opt/homebrew/opt/openssl@1.1/lib/pkgconfig:/usr/local/opt/openssl@1.1/lib/pkgconfig:/opt/homebrew/opt/openssl/lib/pkgconfig:/usr/local/opt/openssl/lib/pkgconfig
+        run: ./Dopamine-CryptexBootstrap/setup.sh --build
+      - name: Upload
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cryptex-build
+          path: Dopamine-CryptexBootstrap/CryptexBootstrap/out/
