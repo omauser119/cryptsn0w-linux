@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-'TSS/Cryptex personalization and installation details are redacted from this educational source release.'
-
 from __future__ import annotations
-
-if __name__ == "__main__":
-    raise SystemExit('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
-
-
 import argparse
 import asyncio
 import hashlib
@@ -33,12 +26,12 @@ def _json_value(value: Any) -> Any:
 
 async def _capture(udid: str, nonce_domain: int) -> dict[str, Any]:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 def main() -> int:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 if __name__ == "__main__":

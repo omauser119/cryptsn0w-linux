@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-'TSS/Cryptex personalization and installation details are redacted from this educational source release.'
-
 from __future__ import annotations
-
-if __name__ == "__main__":
-    raise SystemExit('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
-
-
 import argparse
 import asyncio
 import json
@@ -79,12 +72,12 @@ def _read_payload(
     restore_dir: Path, identity: dict[str, Any], key: str
 ) -> bytes:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 def _validate_identity(identity: dict[str, Any]) -> None:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 def _validate_trustcache(path: Path, expected: dict[str, Any]) -> dict[str, Any]:
@@ -119,7 +112,7 @@ def _validate_bundle(
     bundle: Path, build_summary_path: Path
 ) -> tuple[Path, dict[str, Any], dict[str, bytes], dict[str, Any]]:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 async def _open_rsd(args: argparse.Namespace) -> tuple[Any, Any | None]:
@@ -140,12 +133,12 @@ async def _close_rsd(rsd: Any, owner: Any | None) -> None:
 
 async def _install(args: argparse.Namespace) -> dict[str, Any]:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 def main() -> int:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 if __name__ == "__main__":

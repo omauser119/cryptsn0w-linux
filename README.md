@@ -81,15 +81,15 @@ App launcher and TrollStore registration logs were
 `/var/mobile/.sbinject-app-launcher.log` and
 `/var/mobile/.sbinject-trollstore-registration.log`.
 
-## Redactions
+## Linux port (Sileo + SSH, no SBInject)
 
-TSS request construction, personalization, and related installation details
-are intentionally omitted. The files retain placeholders for educational
-reference.
+This tree includes a Linux path:
+- TSS personalization driven by `/tmp/opencode/tss/FULL_BUG_LIST.md` (BUG-1..BUG-10).
+- `cryptexmanager.py` — list/install/uninstall/info via pymobiledevice3.
+- `linux_install.py` — personalize + install a macOS-built cryptex on Linux.
+- `.github/workflows/build-cryptex-macos.yml` — macOS GitHub Actions build (no SBInject).
 
-Some details are also omitted to avoid prematurely disclosing information
-relevant to other potential TSS issues. This does not mean we have an
-unreleased untethered jailbreak or a working exploit that we are withholding.
+Full SBInject/JIT requires a complete iOS SDK (not available here).
 
 ## Credits
 

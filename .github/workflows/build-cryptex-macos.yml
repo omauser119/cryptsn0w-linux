@@ -1,0 +1,36 @@
+name: Build Cryptex (macOS, no SBInject)
+
+on:
+  workflow_dispatch:
+    inputs:
+      enable_host_ssh:
+        description: "Authorize retained host SSH key"
+        required: false
+        default: "false"
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Homebrew deps
+        run: |
+          brew install dpkg gnupg ldid python ripgrep zstd
+      - name: Prepare
+        run: |
+          ./Dopamine-CryptexBootstrap/setup.sh --prepare
+      - name: Build (no SBInject)
+        env:
+          CODEX_NO_SBINJECT: "1"
+        run: |
+          # Remove SBInject from build by skipping its build step
+          sed -i '' 's/^.*sbinject.*$/# sbinject disabled for Sileo+SSH-only build/' Dopamine-CryptexBootstrap/CryptexBootstrap/build_cryptex.sh
+          ./Dopamine-CryptexBootstrap/setup.sh --build
+      - name: Upload cryptex artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cryptex-build
+          path: |
+            Dopamine-CryptexBootstrap/CryptexBootstrap/out/
+            Dopamine-CryptexBootstrap/CryptexBootstrap/build/
+          retention-days: 7

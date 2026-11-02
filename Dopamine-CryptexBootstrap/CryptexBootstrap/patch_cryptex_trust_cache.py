@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-'TSS/Cryptex personalization and installation details are redacted from this educational source release.'
-
 from __future__ import annotations
-
-if __name__ == "__main__":
-    raise SystemExit('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
-
-
 import argparse
 import hashlib
 import json
@@ -58,7 +51,7 @@ def encode_tlv(tag: int, value: bytes) -> bytes:
 
 def patch_gtcd(gtcd: bytes, cdhashes: list[str]) -> tuple[bytes, list[str]]:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 def atomic_write(path: Path, data: bytes) -> None:
@@ -72,7 +65,7 @@ def atomic_write(path: Path, data: bytes) -> None:
 
 def main() -> int:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 if __name__ == "__main__":

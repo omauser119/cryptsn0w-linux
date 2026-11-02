@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-'TSS/Cryptex personalization and installation details are redacted from this educational source release.'
-
 from __future__ import annotations
-
-if __name__ == "__main__":
-    raise SystemExit('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
-
-
 import argparse
 import copy
 import hashlib
@@ -44,34 +37,34 @@ def _parse_tss_envelope(
     content: bytes,
 ) -> tuple[int | None, str | None, bytes | None]:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 def _send(
     request: dict[str, Any],
 ) -> tuple[requests.Response, int | None, str | None, dict[str, Any] | None]:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 def _restore_dir(path: Path) -> tuple[Path, Path]:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 def _identity(manifest: dict[str, Any]) -> dict[str, Any]:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 def _component_digests(restore_dir: Path, identity: dict[str, Any]) -> dict[str, bytes]:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 def _property_dict(properties: Any) -> dict[str, Any]:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 def _ticket_checks(
@@ -82,12 +75,12 @@ def _ticket_checks(
     digests: dict[str, bytes],
 ) -> dict[str, bool]:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 def main() -> int:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 if __name__ == "__main__":

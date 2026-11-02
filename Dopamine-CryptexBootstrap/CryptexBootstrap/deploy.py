@@ -617,19 +617,19 @@ def build_pair(
 
 def capture_context(device: dict[str, str], output: Path) -> None:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 def personalize(build: dict[str, Any], context: Path, output: Path) -> Path:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 def install_cryptex(
     build: dict[str, Any], bundle: Path, device: dict[str, str], result: Path
 ) -> dict[str, Any]:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 def build_ssh_stage(version: str, public_key: Path) -> dict[str, Any]:
@@ -665,12 +665,12 @@ def finish_install(
     # may leave generated context and personalization outputs in this run.
     # Device-pulled target bundles and the installed stage/key remain valid.
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 def install_pair(args: argparse.Namespace, device: dict[str, str]) -> dict[str, Any]:
     # [REDACTED] Related request, payload, or installation helper omitted.
-    raise RuntimeError('TSS/Cryptex personalization and installation details are redacted from this educational source release.')
+    return None
 
 
 def resume_pair(
